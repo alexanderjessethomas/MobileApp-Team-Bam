@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+  	<button ion-button menuToggle>
+  		<ion-icon name="menu"></ion-icon>
+  	</button>
+    <ion-title>Connect to Car</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <h4>Scan for the Bluetooth Module</h4>
+    
+    <button ion-button icon-left block large (click)="ble_scan()">
+      <ion-icon name="bluetooth"></ion-icon>
+      Scan
+    </button>
+
+    <p>
+      <button ion-button block large color="secondary" (click)="disconnect()">Disconnect</button>
+    </p>
+
+    <ion-item>
+      <h6 id="status"></h6>
+    </ion-item>
+
+    <ion-item padding>
+      <p text-wrap text-center>When connected, press GO to navigate to the Car Controller</p>
+      <button ion-button block large outline (click)="goToController()">GO</button>
+    </ion-item>
+
+    <ion-card *ngIf="devices.length">
+
+      <ion-card-header>
+        Discovered Devices
+      </ion-card-header>
+      
+      <ion-list>
+
+        <ion-item *ngFor="let device of devices" >
+          <ion-label>
+            {{device.name}}
+          </ion-label>
+          <div item-content>
+            <button ion-button (click)="connect(device)">Connect</button>
+          </div>
+        </ion-item>
+
+      </ion-list>
+      
+      <p padding>Ignore duplicate names... Either connect button will work.</p>
+      <p padding-bottom padding-left padding-right>Ignore blank names</p>
+    </ion-card>
+
+    <!-- Why the F*** doesn't this work?!! >:( -->
+    <!--<ion-spinner *ngIf="isScanning==true" name="circles"></ion-spinner>-->
+
+    
+    <!-- For testing
+    <p id="state">state</p>
+    <p id="action">action</p>
+    <p id="data">data</p>
+    <p id="test">test</p>
+    -->
+</ion-content>
